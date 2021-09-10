@@ -1,5 +1,5 @@
 const korisnici=require('../database/tabela-korisnici');
-//const {generisiToken}=require('../auth/jwt');
+const {generisiToken}=require('../auth/jwt');
 const bcrypt = require('bcrypt');
 //const { JsonWebTokenError } = require('jsonwebtoken');
 const saltRounds = 10;
@@ -43,9 +43,9 @@ signUp: async function(req,res){
     else
       res.status(500).json(err);
   }
-}
+},
 
-/*async function logIn(req,res){
+logIn: async function(req,res){
 
   try{
     const k = await korisnici.selectUsername(req.body.username);
@@ -56,7 +56,7 @@ signUp: async function(req,res){
     if(!match)
       return res.status(403).json({err:'Pogrešna lozinka'});
 
-    const token=await generisiToken(k.id_korisnika,k.verifikovan);
+    const token=await generisiToken(k.id_korisnika,k.admin);
     res.status(200).json({token:token});
   } catch(err){
     console.error(err);
@@ -65,6 +65,6 @@ signUp: async function(req,res){
     else
       res.status(500).json(err);
   }
-}*/
+}
 
 }
